@@ -4,7 +4,7 @@
   "description": "Express app with random greeting and health check endpoints",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node dist/index.js",
     "dev": "nodemon index.js",
     "build": "ncc build index.js -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"

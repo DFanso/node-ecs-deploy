@@ -17,10 +17,8 @@ RUN yarn global add @vercel/ncc
 # Copy the rest of the application code
 COPY . .
 
-# Build the NestJS application with ncc
-RUN npm run build
-
-COPY .env ./dist
+# Build the application with ncc
+RUN yarn build
 
 # Stage 2: Create a lightweight image to run the app
 FROM --platform=linux/${arch} node:20-alpine
@@ -32,12 +30,12 @@ WORKDIR /usr/src/app
 
 # Copy built files from the builder stage
 COPY --from=builder /usr/src/app/dist ./dist
-COPY --from=builder /usr/src/app/package*.json ./dist
+COPY --from=builder /usr/src/app/package.json ./
 
 # Expose the application's port
 EXPOSE 3000
 
-WORKDIR /usr/src/app/dist
+WORKDIR /usr/src/app
 
 # Set the default command to run the application
-CMD ["node", "index.js"]
+CMD ["node", "dist/index.js"]
