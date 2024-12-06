@@ -21,7 +21,6 @@ COPY . .
 RUN npm run build
 
 COPY .env ./dist
-COPY firebase.json ./dist
 
 # Stage 2: Create a lightweight image to run the app
 FROM --platform=linux/${arch} node:20-alpine
@@ -36,7 +35,7 @@ COPY --from=builder /usr/src/app/dist ./dist
 COPY --from=builder /usr/src/app/package*.json ./dist
 
 # Expose the application's port
-EXPOSE 8080
+EXPOSE 3000
 
 WORKDIR /usr/src/app/dist
 
