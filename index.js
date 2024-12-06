@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT;
+const port = 3000;
 
 // Array of greetings in different languages
 const greetings = [
